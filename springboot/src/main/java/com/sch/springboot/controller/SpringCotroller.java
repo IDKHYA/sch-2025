@@ -1,13 +1,19 @@
 package com.sch.springboot.controller;
 
 
+import com.sch.springboot.dto.Member;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class SpringCotroller {
+
     @GetMapping("/spring")
     public String spring(@RequestParam("name") String name,
                          @RequestParam("age")  int age,
