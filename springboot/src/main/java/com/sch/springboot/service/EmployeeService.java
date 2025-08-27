@@ -6,6 +6,7 @@ import com.sch.springboot.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -20,5 +21,8 @@ public class EmployeeService {
     public String register(Employee employee) {
         return employeeRepository.insert(employee);
     }
-
+    //사원 리스트
+    public List<Employee> findAll(){
+        return employeeRepository.selectAll();
+    }
 }
