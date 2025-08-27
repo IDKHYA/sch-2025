@@ -23,6 +23,7 @@ public class EmployeeRepository {
         String result = "";
         if(List.add(employee)) {
             //성공
+            //employees.add(employee);
             result = "success";
         }else{
             //실패
