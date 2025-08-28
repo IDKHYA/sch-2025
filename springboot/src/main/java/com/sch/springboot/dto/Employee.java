@@ -1,16 +1,47 @@
 package com.sch.springboot.dto;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+
+import java.time.LocalDateTime;
+
+@Entity
 public class Employee {
-    private Long sno;
+
+
+    @Id
+    private int sno;
+
     private String name;
     private String department;
     private String address;
 
-    public Long getSno() {
+    @Column(name = "edate", nullable = false) // 호출이 되워질때 edate로 만들어지고, 입력을 받지않고 자동으로 만들어짐
+    private LocalDateTime edate;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.edate == null) {
+            this.edate = LocalDateTime.now();
+        }
+    }
+
+//    public String getEdate() {
+//        return edate;
+//    }
+//
+//    public void setEdate(String edate) {
+//        this.edate = edate;
+//    }
+
+    public int getSno() {
         return sno;
     }
 
-    public void setSno(Long sno) {
+    public void setSno(int sno) {
         this.sno = sno;
     }
 

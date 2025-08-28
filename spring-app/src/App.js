@@ -40,6 +40,7 @@ function EmployeeRegister(props) {
   const [sno] = useState(Math.floor(Math.random() * 100000));
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [department, setDepartment] = useState("");
 
   function handleSignup() {
     //스프링 부트 호출 및 연동
@@ -47,12 +48,13 @@ function EmployeeRegister(props) {
       sno: sno,
       name: name,
       address: address,
+      department: department,
     };
 
     axios
       .post("http://localhost:8080/api/employees/register", data)
       .then((response) => {
-        if (response.data === "success") {
+        if (response.data !== 0) {
           alert("가입이 완료되었습니다");
           props.handleChangePage("home");
         }
@@ -100,6 +102,18 @@ function EmployeeRegister(props) {
               }}
             />
           </li>
+          <li>
+            <label htmlFor="name">부서</label>
+            <input
+              type="text"
+              id="department"
+              name="department"
+              placeholder="부서명을 입력하세요"
+              onChange={(e) => {
+                setDepartment(e.target.value);
+              }}
+            />
+          </li>
         </ul>
         <button type="button" onClick={handleSignup}>
           등록하기
@@ -113,6 +127,7 @@ function EmployeeRegister(props) {
  * 사원 리스트 컴포넌트
  */
 function EmployeeList(props) {
+
   const [employeeList, setEmployeeList] = useState([]);
 
   useEffect(() => {
@@ -133,6 +148,9 @@ function EmployeeList(props) {
             <th>사원번호</th>
             <th>이름</th>
             <th>주소</th>
+            <th>부서</th>
+            <th>생성 일자</th>
+
           </tr>
         </thead>
         <tbody>
@@ -141,6 +159,8 @@ function EmployeeList(props) {
               <td>{employee.sno}</td>
               <td>{employee.name}</td>
               <td>{employee.address}</td>
+              <td>{employee.department}</td>
+              <td>{employee.edate}</td>
             </tr>
           ))}
         </tbody>

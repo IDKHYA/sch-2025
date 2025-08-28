@@ -23,7 +23,7 @@ public class EmployeeController {
 
 //    @ResponseBody
     @PostMapping("/register")
-    public String register(@ModelAttribute Employee employee) {
+    public int register(@ModelAttribute Employee employee) {
         return employeeService.register(employee);
     }
 

@@ -23,7 +23,7 @@ public class RestEmployeeController {
      * 사원 등록
      */
     @PostMapping("/employees/register")
-    public String register(@RequestBody Employee employee) {
+    public int register(@RequestBody Employee employee) {
         // System.out.println(employee.getName());
         // System.out.println(employee.getAddress());
        //employees.add(employee);
