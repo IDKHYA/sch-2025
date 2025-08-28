@@ -19,7 +19,7 @@
   },
   "proxy": "http://localhost:8080",
   "scripts": {
-    "start": "cross-env port=3000 react-scripts start",
+    "start": "cross-env port=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
