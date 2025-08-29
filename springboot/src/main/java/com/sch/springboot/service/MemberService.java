@@ -1,6 +1,5 @@
 package com.sch.springboot.service;
 
-
 import com.sch.springboot.entity.Member;
 import com.sch.springboot.repository.JpaMemberRepository;
 import jakarta.transaction.Transactional;
@@ -12,20 +11,24 @@ import java.util.List;
 @Service
 @Transactional
 public class MemberService {
-    
-    //Jpa Responsitory DI
-    private final JpaMemberRepository memberRepository;
+
+    private JpaMemberRepository memberRepository;
+
     @Autowired
-    public MemberService(JpaMemberRepository MemberRepository) {
-        this.memberRepository = MemberRepository;
+    public MemberService(JpaMemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
-    
+
+    public String delete(Long sno) {
+        return memberRepository.delete(sno);
+    }
+
     public String save(Member member) {
-        //repository 호출
         return memberRepository.insert(member);
     }
 
-    public List<Member> list(){
-        return  memberRepository.findAll();
+    public List<Member> list() {
+        return memberRepository.findAll();
     }
+
 }

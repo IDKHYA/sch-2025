@@ -1,6 +1,5 @@
 package com.sch.springboot.repository;
 
-
 import com.sch.springboot.entity.Dwitter;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,16 @@ public class JpaDwitterRepository implements DwitterRepositoryInterface {
     }
 
     @Override
+    public String delete(Long id) {
+        //id를 가진 엔티티객체(Dwitter) 객체가 존재하면 삭제!!
+        Dwitter findDwitter = em.find(Dwitter.class, id);
+        if(findDwitter != null) {
+            em.remove(findDwitter); //delete from dwitter where id = 1;
+        }
+        return "ok";
+    }
+
+    @Override
     public List<Dwitter> findAll() {
         return em.createQuery("select m from Dwitter m", Dwitter.class).getResultList();
     }
@@ -29,14 +38,5 @@ public class JpaDwitterRepository implements DwitterRepositoryInterface {
         return "ok";
     }
 
-    @Override
-    public String update(Long id) {
-        //id를 가진 엔티티객체(Dwitter) 객체가 존재하면 삭제
-        Dwitter finDwitter = em.find(Dwitter.class, id);
-        if(finDwitter != null){
-            em.remove(finDwitter);
-        }
-        return "ok";
-    }
 
 }

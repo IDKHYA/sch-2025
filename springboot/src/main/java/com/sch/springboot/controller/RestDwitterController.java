@@ -3,8 +3,9 @@ package com.sch.springboot.controller;
 import com.sch.springboot.entity.Dwitter;
 import com.sch.springboot.service.DwitterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -19,22 +20,20 @@ public class RestDwitterController {
         this.dwitterService = dwitterService;
     }
 
-    //정보 등록
+    @PostMapping("/dwitters/delete")
+    public String deleteDwitter(@RequestBody Dwitter dwitter) {
+        System.out.println(dwitter.getId());
+        return dwitterService.delete(Long.valueOf(dwitter.getId()));
+    }
+
+    @GetMapping("/dwitters")
+    public List<Dwitter> getDwitters() {
+        return dwitterService.list();
+    }
+
     @PostMapping("/dwitters/register")
     public String register(@RequestBody Dwitter dwitter) {
         return dwitterService.save(dwitter);
     }
-
-    @GetMapping("/dwitters")
-    public List<Dwitter> getDwitters(){
-        return dwitterService.list();
-    }
-
-    @PostMapping("/dwitters/delete")
-    public String delete(@RequestBody Dwitter dwitter) {
-        System.out.println(dwitter.getId());
-        return dwitterService.delete2(Long.valueOf(dwitter.getId()));
-    }
-
 
 }

@@ -1,7 +1,5 @@
 package com.sch.springboot.repository;
 
-
-import com.sch.springboot.dto.Employee;
 import com.sch.springboot.entity.Member;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ public class JpaMemberRepository implements MemberRepositoryInterface {
         this.em = em;
     }
 
-    //EntityManager 생성자 DI
-
     @Override
     public String insert(Member member) {
         em.persist(member);
@@ -29,7 +25,16 @@ public class JpaMemberRepository implements MemberRepositoryInterface {
 
     @Override
     public List<Member> findAll() {
-        return em.createQuery("select m from Employee m", Member.class)
-                .getResultList();
+        return em.createQuery("select m from Member m", Member.class).getResultList();
     }
+
+    @Override
+    public String delete(Long sno) {
+        Member findMember = em.find(Member.class,sno);
+        if(findMember!=null){
+            em.remove(findMember);
+        }
+        return "ok";
+    }
+
 }

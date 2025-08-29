@@ -19,6 +19,11 @@ public class RestMemberController {
         this.memberService = memberService;
     }
 
+    @PostMapping("/members/delete")
+    public String deleteMember(@RequestBody Member member) {
+        return memberService.delete(member.getSno());
+    }
+
     //회원 등록
     @PostMapping("/members/register")
     public String registerMember(@RequestBody Member member) {
