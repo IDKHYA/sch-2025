@@ -1,0 +1,35 @@
+package com.sch.springboot.repository;
+
+
+import com.sch.springboot.dto.Employee;
+import com.sch.springboot.entity.Member;
+import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class JpaMemberRepository implements MemberRepositoryInterface {
+
+    private final EntityManager em;
+
+    @Autowired
+    public JpaMemberRepository(EntityManager em) {
+        this.em = em;
+    }
+
+    //EntityManager 생성자 DI
+
+    @Override
+    public String insert(Member member) {
+        em.persist(member);
+        return member.getName();
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return em.createQuery("select m from Employee m", Member.class)
+                .getResultList();
+    }
+}

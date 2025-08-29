@@ -34,7 +34,7 @@ export default function App() {
 }
 
 /**
- * 사원 등록 컴포넌트
+ * 회원 등록 컴포넌트
  */
 function EmployeeRegister(props) {
   const [sno] = useState(Math.floor(Math.random() * 100000));
@@ -54,7 +54,8 @@ function EmployeeRegister(props) {
     axios
       .post("http://localhost:8080/api/members/register", data)
       .then((response) => {
-        if (response.data !== 0) {
+        console.log(response.data);
+        if (response.data !== "") {
           alert("가입이 완료되었습니다");
           props.handleChangePage("home");
         }
@@ -127,7 +128,6 @@ function EmployeeRegister(props) {
  * 사원 리스트 컴포넌트
  */
 function EmployeeList(props) {
-
   const [employeeList, setEmployeeList] = useState([]);
 
   useEffect(() => {
@@ -149,8 +149,7 @@ function EmployeeList(props) {
             <th>이름</th>
             <th>주소</th>
             <th>부서</th>
-            <th>생성 일자</th>
-
+            <th>입사일</th>
           </tr>
         </thead>
         <tbody>
@@ -160,7 +159,7 @@ function EmployeeList(props) {
               <td>{employee.name}</td>
               <td>{employee.address}</td>
               <td>{employee.department}</td>
-              <td>{employee.edate}</td>
+              <td>{employee.mdate}</td>
             </tr>
           ))}
         </tbody>
